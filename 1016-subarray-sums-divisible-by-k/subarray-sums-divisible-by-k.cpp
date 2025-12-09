@@ -14,7 +14,7 @@ public:
 }*/
 
 /*int n = nums.size();
-    vector<int> prefix(n+1, 0);
+    vector<int> prefix(n+1, 0);333333333333
     for (int i = 0; i < n; i++) {
         prefix[i+1] = prefix[i] + nums[i];
     }
@@ -28,17 +28,15 @@ public:
     return result;
     }*/
      unordered_map<int, int> count;
-    count[0] = 1;  // base case
+    count[0] = 1; 
     int prefixSum = 0, result = 0;
     
-    for (int num : nums) {
-        prefixSum += num;
-        int rem = ((prefixSum % k) + k) % k;  // handle negatives
+    for (int n : nums) {
+        prefixSum += n;
+        int rem = ((prefixSum % k) + k) %k; 
         result += count[rem];
         count[rem]++;
     }
     return result;
 }
-
-
 };
