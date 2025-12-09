@@ -27,16 +27,20 @@ public:
     }
     return result;
     }*/
-     unordered_map<int, int> count;
-    count[0] = 1; 
-    int prefixSum = 0, result = 0;
-    
-    for (int n : nums) {
-        prefixSum += n;
-        int rem = ((prefixSum % k) + k) % k; 
-        result += count[rem];
-        count[rem]++;
+unordered_map<int , int> mp ;
+mp[0] = 1;
+int sum = 0  , count = 0  ;
+for( int i = 0 ; i < nums.size() ; i++){
+    sum = sum + nums[i];
+    int rem = sum % k ;
+    if (rem < 0 ){
+        rem = rem + k;
     }
-    return result;
-}
+     if (mp.count(rem)){
+        count = count + mp[rem];
+     }
+         mp[rem]++;
+     }
+     return count;
+    }
 };
