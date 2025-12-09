@@ -33,7 +33,7 @@ public:
     
     for (int n : nums) {
         prefixSum += n;
-        int rem = ((prefixSum % k) + k) %k; 
+        int rem = ((prefixSum % k) + k) % k; 
         result += count[rem];
         count[rem]++;
     }
