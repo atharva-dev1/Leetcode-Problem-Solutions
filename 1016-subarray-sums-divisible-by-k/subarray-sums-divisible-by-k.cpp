@@ -1,16 +1,44 @@
 class Solution {
 public:
     int subarraysDivByK(vector<int>& nums, int k) {
-    unordered_map<int,int> freq;
-    freq[0] = 1; // base case
-    int prefix = 0, count = 0;
-    for (int num : nums) {
-        prefix += num;
-        int rem = ((prefix % k) + k) % k; // normalize remainder
-        if (freq.count(rem)) count += freq[rem];
-        freq[rem]++;
+    /*int n = nums.size();
+    int result = 0;
+    for (int i = 0; i < n; i++) {
+        int sum = 0;
+        for (int j = i; j < n; j++) {
+            sum += nums[j];
+            if (sum % k == 0) result++;
+        }
     }
-    return count;
+    return result;
+}*/
 
+/*int n = nums.size();
+    vector<int> prefix(n+1, 0);
+    for (int i = 0; i < n; i++) {
+        prefix[i+1] = prefix[i] + nums[i];
     }
+    int result = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = i+1; j <= n; j++) {
+            int sum = prefix[j] - prefix[i];
+            if (sum % k == 0) result++;
+        }
+    }
+    return result;
+    }*/
+     unordered_map<int, int> count;
+    count[0] = 1;  // base case
+    int prefixSum = 0, result = 0;
+    
+    for (int num : nums) {
+        prefixSum += num;
+        int rem = ((prefixSum % k) + k) % k;  // handle negatives
+        result += count[rem];
+        count[rem]++;
+    }
+    return result;
+}
+
+
 };
