@@ -1,33 +1,40 @@
 class Solution {
 public:
     long long minimumCost(string source, string target, vector<char>& original, vector<char>& changed, vector<int>& cost) {
-        long ans = 0;
-    // dist[u][v] := the minimum distance to change ('a' + u) to ('a' + v)
-    vector<vector<long>> dist(26, vector<long>(26, LONG_MAX));
+        const int inf = 1 << 29;
+        int g[26][26];
+        for (int i = 0; i < 26; ++i) {
+            fill(begin(g[i]), end(g[i]), inf);
+            g[i][i] = 0;
+        }
 
-    for (int i = 0; i < cost.size(); ++i) {
-      const int u = original[i] - 'a';
-      const int v = changed[i] - 'a';
-      dist[u][v] = min(dist[u][v], static_cast<long>(cost[i]));
-    }
+        for (int i = 0; i < original.size(); ++i) {
+            int x = original[i] - 'a';
+            int y = changed[i] - 'a';
+            int z = cost[i];
+            g[x][y] = min(g[x][y], z);
+        }
 
-    for (int k = 0; k < 26; ++k)
-      for (int i = 0; i < 26; ++i)
-        if (dist[i][k] < LONG_MAX)
-          for (int j = 0; j < 26; ++j)
-            if (dist[k][j] < LONG_MAX)
-              dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+        for (int k = 0; k < 26; ++k) {
+            for (int i = 0; i < 26; ++i) {
+                for (int j = 0; j < 26; ++j) {
+                    g[i][j] = min(g[i][j], g[i][k] + g[k][j]);
+                }
+            }
+        }
 
-    for (int i = 0; i < source.length(); ++i) {
-      if (source[i] == target[i])
-        continue;
-      const int u = source[i] - 'a';
-      const int v = target[i] - 'a';
-      if (dist[u][v] == LONG_MAX)
-        return -1;
-      ans += dist[u][v];
-    }
-
-    return ans;
+        long long ans = 0;
+        int n = source.length();
+        for (int i = 0; i < n; ++i) {
+            int x = source[i] - 'a';
+            int y = target[i] - 'a';
+            if (x != y) {
+                if (g[x][y] >= inf) {
+                    return -1;
+                }
+                ans += g[x][y];
+            }
+        }
+        return ans;
     }
 };
