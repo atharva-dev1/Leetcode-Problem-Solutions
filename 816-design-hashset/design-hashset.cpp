@@ -1,8 +1,10 @@
 class MyHashSet {
 public:
     MyHashSet() { 
+        
     }
-     unordered_set<int>s;
+    unordered_set<int>s;
+
     void add(int key) {
         s.insert(key);
     }
