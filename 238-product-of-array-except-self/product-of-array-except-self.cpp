@@ -19,31 +19,28 @@ public:
     //     return ans;
     // }
 
-     int total = 1;
-        int zeroCount = 0;
+    //  
+    
+     int n = nums.size();
 
-        for(int num : nums) {
-            if(num == 0)
-                zeroCount++;
-            else
-                total *= num;
+        vector<int> prefix(n);
+        vector<int> suffix(n);
+        vector<int> ans(n);
+
+        prefix[0] = 1;
+
+        for(int i = 1; i < n; i++) {
+            prefix[i] = prefix[i - 1] * nums[i - 1];
         }
 
-        vector<int> ans;
+        suffix[n - 1] = 1;
 
-        for(int num : nums) {
-            if(zeroCount > 1) {
-                ans.push_back(0);
-            }
-            else if(zeroCount == 1) {
-                if(num == 0)
-                    ans.push_back(total);
-                else
-                    ans.push_back(0);
-            }
-            else {
-                ans.push_back(total / num);
-            }
+        for(int i = n - 2; i >= 0; i--) {
+            suffix[i] = suffix[i + 1] * nums[i + 1];
+        }
+
+        for(int i = 0; i < n; i++) {
+            ans[i] = prefix[i] * suffix[i];
         }
 
         return ans;
