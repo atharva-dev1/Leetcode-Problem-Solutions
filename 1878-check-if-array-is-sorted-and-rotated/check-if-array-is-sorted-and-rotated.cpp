@@ -10,6 +10,6 @@ public:
         }
         if(nums[n-1] > nums[0])
             count++;
-            return count <= 1;
+            return count <= 1; // here i do change from count == 1;
     }
 };
