@@ -14,16 +14,16 @@ public:
 vector <int> ans;
     vector<int> inorderTraversal(TreeNode* root) 
     {
-        fun(root);
+        fun(root, ans);
         return ans;
         }
-        void fun(TreeNode* root)
+        void fun(TreeNode* root, vector<int> &ans)
         {
         if ( root == NULL)
             return ;
-            fun(root -> left);
+            fun(root -> left, ans);
             ans.push_back(root-> val);
-            fun(root -> right);
+            fun(root -> right, ans);
         
     }
         
