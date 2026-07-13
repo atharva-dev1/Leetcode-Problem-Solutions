@@ -14,7 +14,7 @@ public:
 int count = 0 ;
     int countNodes(TreeNode* root) {       // Aprroach 1
         return countNode(root);
-        return count;
+       // return count;
     }
     // void Inorder(TreeNode * root){
     //     if (root == NULL)
