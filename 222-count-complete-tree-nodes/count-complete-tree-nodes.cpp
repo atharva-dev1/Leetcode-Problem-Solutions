@@ -34,7 +34,7 @@ int h = 0 ;
     // }
 
 
-int countNode(TreeNode *root){
+int countNode(TreeNode *root){          // approach 3
     if (root == NULL) return 0;
     int left_level = 1 , right_level = 1;
     TreeNode *l = root-> left;
@@ -48,7 +48,7 @@ int countNode(TreeNode *root){
         right_level = right_level + 1;
     }
     if (left_level == right_level)
-   return pow(2,left_level)-1;
+   return pow(2,right_level)-1;
    return 1 + countNode(root-> left)+  countNode(root-> right);
     
 }
