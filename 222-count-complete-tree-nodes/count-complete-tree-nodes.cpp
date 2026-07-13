@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-int h = 0 ;
+//int count = 0 ;
     int countNodes(TreeNode* root) {       // Aprroach 1
         return countNode(root);
        // return count;
@@ -48,7 +48,7 @@ int countNode(TreeNode *root){          // approach 3
         right_level = right_level + 1;
     }
     if (left_level == right_level)
-   return pow(2,right_level)-1;
+   return pow(2,left_level)-1;
    return 1 + countNode(root-> left)+  countNode(root-> right);
     
 }
