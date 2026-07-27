@@ -13,7 +13,7 @@ class Solution {
 public:
     void preorder(TreeNode* n, vector<int> &v) {
         if (n == NULL) {
-            v.push_back(10000);
+            v.push_back(100001);
         } else {
             v.push_back(n->val);
             preorder(n->left, v);
