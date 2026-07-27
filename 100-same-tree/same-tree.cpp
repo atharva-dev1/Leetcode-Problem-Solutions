@@ -11,10 +11,20 @@
  */
 class Solution {
 public:
+    void preorder(TreeNode* n, vector<int> &v) {
+        if (n == NULL) {
+            v.push_back(10000);
+        } else {
+            v.push_back(n->val);
+            preorder(n->left, v);
+            preorder(n->right, v);
+        }
+    }
+
     bool isSameTree(TreeNode* p, TreeNode* q) {
-        if (p == q) return true;
-        if (!p || !q || p->val != q->val) return false;
-        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
-        
+        vector<int> vp, vq;
+        preorder(p, vp);
+        preorder(q, vq);
+        return vp == vq;
     }
 };
