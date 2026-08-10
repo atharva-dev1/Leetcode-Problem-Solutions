@@ -18,7 +18,7 @@ public:
     }
 
     vector<vector<int>> permute(vector<int>& nums) {
-        res.clear();
+      
         fun(nums, 0, nums.size());
         return res;
     }
